@@ -6,11 +6,14 @@ typedef struct {
     char height;
     char width;
     char contents[0][0];
-    int position[2]; // Coords of player withing maze
+    int startPosition[2]; // Coords of 'S' withing maze
+    int endPosition[2]; // Coords of 'E' withing maze
+    int playerPosition[2]; // Coords of player withing maze
 } maze;
 
 int createMazeStruct(char filename[100]){
-    // Create file and interate through to fill maze height, width
+    // Create file and iterate through to fill maze height, width, start position and end position
+    // Set playerPosition to startPosition
     // Reallocate memory for contents so dimensions are height and width, then fill
     // If there are any invalid characters, return 0 (maze is invalid)
     // Close file
@@ -36,43 +39,50 @@ int checkWin(){
     // Return 1 if yes, 0 if no
 }
 
+int checkValidMaze(){
+    // MAZE TESTING - if any tests fail, return 0, otherwise return 1
+        
+    // If dimensions are correct and maze is rectangular
+
+    // If maze is possible
+
+    // If maze has holes in outer wall
+
+    // If maze has multiple S/E
+
+    // If maze is missing S or E
+}
+
 int main(){
     // Iterate until valid maze found
     int valid = 0;
     while(valid == 0){
         valid = 1;
-        // Open text document
+        // Input filename
         char filename[100];
         // Check if filename is valid, then pass into createMazeStruct
         valid = createMazeStruct(filename);
 
         // MAZE TESTING - if any tests fail, valid is changed to 0
-    
-        // If dimensions are correct
-
-        // If maze has holes in outer wall
-
-        // If maze has multiple S/E
-
-        // If maze is missing S or E
+        valid = checkValidMaze();
     }
 
-    // Now complete maze
+    // PLAY MAZE
     int solved = 0;
     char move;
     while (solved == 0){
         // Input move
         // Check move is valid
-        if (validMove(move) == 0){
-            movePlayer(move);
+        if (move == 'm' || move == 'M'){
+            // Show map
+        }
+        else if (validMove(move) == 0){
+            // Move player in intended direction
         }
         else{
             // Error message
             continue;
         }
-
-        // If move is m, show map
-        // Otherwise, move player in intended direction
 
         // Check for win
         if (checkWin() == 1){
@@ -81,5 +91,5 @@ int main(){
     }
 
     // Display congratulations message
-    // Ask if player would like to retry with the same/different maze
+    // Close game
 }
